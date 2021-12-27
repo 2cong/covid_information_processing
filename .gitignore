@@ -1,0 +1,23 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# pyenv
+.python-version
+
+# Pyre type checker
+.pyre/
+
+.idea
+.DS_Store
+
+# python
+.Python
+
+# config
+/config.py
