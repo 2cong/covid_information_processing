@@ -20,4 +20,4 @@ venv.bak/
 .Python
 
 # config
-/config.py
+.config
