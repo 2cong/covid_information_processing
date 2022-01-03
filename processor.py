@@ -9,12 +9,12 @@ from config import Config
 
 class CovidStatesGenerationProcess:
     @classmethod
-    def get_response(cls, end_date):
+    def get_response(cls, start_date, end_date):
         url = f'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?'
 
         params = {
             'ServiceKey': Config.SERVICE_KEY,
-            'startCreateDt': 20200120,
+            'startCreateDt': start_date,
             'endCreateDt': end_date
         }
 
@@ -31,15 +31,15 @@ class CovidStatesGenerationProcess:
     def convert_covid_states(cls, item):
         covid_state = {
             'date': item.find('stateDt').text,
-            'confirmed_count': item.find('decideCnt').text,
-            'death_count': item.find('deathCnt').text,
+            'accum_confirmed_count': item.find('decideCnt').text,
+            'accum_death_count': item.find('deathCnt').text,
         }
 
         return covid_state
 
     @classmethod
-    def execute(cls, end_date):
-        response = cls.get_response(end_date)
+    def execute(cls, start_date, end_date):
+        response = cls.get_response(start_date, end_date)
 
         tree = ElementTree.fromstring(response)
         covid_states = []
